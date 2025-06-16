@@ -1,12 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // Select DOM elements and check if they exist
     const addButton = document.getElementById("add-task-btn");
     const taskInput = document.getElementById("task-input");
     const taskList = document.getElementById("task-list");
 
+    if (!addButton || !taskInput || !taskList) {
+        console.error("Error: Required elements not found in the DOM.");
+        return; // Exit if any required elements are missing
+    }
+
     loadTasks(); // Load stored tasks when the page loads
 
     function addTask(taskText, save = true) {
-        if (!taskText.trim()) {
+        taskText = taskText.trim(); // Remove extra spaces
+
+        if (!taskText) {
             alert("Please enter a task!");
             return;
         }
@@ -53,6 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
         storedTasks.forEach(taskText => addTask(taskText, false));
     }
 
+    // Attach event listeners
     addButton.addEventListener("click", () => {
         addTask(taskInput.value);
     });
@@ -63,4 +72,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+     
+
+  
+  
 
